@@ -2,33 +2,52 @@
 # A personal project for an acceptable music playing assistant
 
 # Local test file /home/tony/Music/Sublime/40oz. To Freedom [Explicit]/10 - Scarlet Begonias.mp3
-
+testSong = '/home/tony/Music/Sublime/40oz. To Freedom [Explicit]/10 - Scarlet Begonias.mp3'
 
 # Import modules
-from pygame import mixer
-from time import sleep
+from pygame import mixer, time
 
-# Basic Functions
 # Initialize mixer
 mixer.init()
 
-# Play file 
-mixer.music.load('/home/tony/Music/Sublime/40oz. To Freedom [Explicit]/10 - Scarlet Begonias.mp3')
+# Basic Functions
 
 
-mixer.music.play()
+# Play Music Function 
+def play(file):
+    mixer.music.load(file)
+    mixer.music.play()
+    print(f"Now Playing: {file}")
+    while mixer.music.get_busy():
+        time.Clock().tick()
 
-while mixer.music.get_busy():
-    sleep(1)
+# Pause/Resume Playback Function
+def pause():
+    if mixer.music.get_busy():
+        mixer.pause()
+        print(f"Now Paused: {file}")
+    else:
+        mixer.unpause()
+        print(f"Resumed Playing: {file}")
 
-print ("done")
-
-# Pause playback
-
-# Resume playback
-
-# Stop playback
+# Stop Playback Function
+def stop():
+    mixer.music.stop()
 
 # Add file to list
 
 # Remove file from list
+
+# Quit Program
+def quitPmp():
+    mixer.quit()
+    exit(0)
+
+# MAIN LOOP
+
+# args of pmp play,(file)/add,(file)/pause/stop
+
+# some kind of update(dt) loop? -- doesnt really make sense
+# checking for input commands
+playMusic(testSong)
+
